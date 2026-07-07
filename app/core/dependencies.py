@@ -2,6 +2,7 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
+from app.services.cover_letter_service import CoverLetterService
 from app.services.document_service import DocumentService
 from app.services.job_service import JobService
 from app.services.match_service import MatchService
@@ -27,6 +28,10 @@ def get_match_service(db: Session = Depends(get_db)) -> MatchService:
 
 def get_tailor_service(db: Session = Depends(get_db)) -> TailorService:
     return TailorService(db)
+
+
+def get_cover_letter_service(db: Session = Depends(get_db)) -> CoverLetterService:
+    return CoverLetterService(db)
 
 
 def get_current_user_id() -> int:
