@@ -26,3 +26,9 @@ class JobSource(str, Enum):
     NAUKRI = "NAUKRI"
     GREENHOUSE = "GREENHOUSE"
     LEVER = "LEVER"
+
+class MatchLevel(str, Enum):
+    EXCELLENT = "EXCELLENT"   # 80-100
+    GOOD = "GOOD"             # 60-79
+    FAIR = "FAIR"             # 40-59
+    POOR = "POOR"             # 0-39    

@@ -1,3 +1,9 @@
+import asyncio
+import sys
+
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -5,6 +11,7 @@ from fastapi import FastAPI
 from app.api.health import router as health_router
 from app.api.info import router as info_router
 from app.api.jobs import router as jobs_router
+from app.api.match import router as match_router
 from app.api.resume import router as resume_router
 from app.core.config import settings
 from app.database.init_db import init_database
@@ -27,15 +34,11 @@ from app.utils.logger import logger
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-
     logger.info("===================================")
     logger.info(f"Starting {settings.APP_NAME}")
     logger.info("===================================")
-
     init_database()
-
     yield
-
     logger.info("Application Shutdown")
 
 
@@ -58,11 +61,11 @@ app.include_router(health_router)
 app.include_router(info_router)
 app.include_router(resume_router)
 app.include_router(jobs_router)
+app.include_router(match_router)
 
 
 @app.get("/", tags=["Root"])
 async def root():
-
     return {
         "success": True,
         "message": f"Welcome to {settings.APP_NAME}",
