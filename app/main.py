@@ -13,6 +13,7 @@ from app.api.info import router as info_router
 from app.api.jobs import router as jobs_router
 from app.api.match import router as match_router
 from app.api.resume import router as resume_router
+from app.api.tailor import router as tailor_router
 from app.core.config import settings
 from app.database.init_db import init_database
 from app.exceptions.custome_exceptions import (
@@ -62,6 +63,7 @@ app.include_router(info_router)
 app.include_router(resume_router)
 app.include_router(jobs_router)
 app.include_router(match_router)
+app.include_router(tailor_router)
 
 
 @app.get("/", tags=["Root"])
