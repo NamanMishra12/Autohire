@@ -15,9 +15,13 @@ class ParsingStatus(str, Enum):
 
 class ApplicationStatus(str, Enum):
     PENDING = "PENDING"
+    QUEUED = "QUEUED"
+    APPLYING = "APPLYING"
     APPLIED = "APPLIED"
+    FAILED = "FAILED"
     REJECTED = "REJECTED"
     INTERVIEW = "INTERVIEW"
+    OFFER = "OFFER"
 
 
 class JobSource(str, Enum):
@@ -27,8 +31,14 @@ class JobSource(str, Enum):
     GREENHOUSE = "GREENHOUSE"
     LEVER = "LEVER"
 
+
 class MatchLevel(str, Enum):
-    EXCELLENT = "EXCELLENT"   # 80-100
-    GOOD = "GOOD"             # 60-79
-    FAIR = "FAIR"             # 40-59
-    POOR = "POOR"             # 0-39    
+    EXCELLENT = "EXCELLENT"
+    GOOD = "GOOD"
+    FAIR = "FAIR"
+    POOR = "POOR"
+
+
+class ApplyMethod(str, Enum):
+    AUTO = "AUTO"
+    MANUAL = "MANUAL"
