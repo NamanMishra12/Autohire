@@ -10,6 +10,7 @@ from app.services.job_service import JobService
 from app.services.match_service import MatchService
 from app.services.resume_service import ResumeService
 from app.services.tailor_service import TailorService
+from app.services.user_service import UserService
 
 
 def get_resume_service(db: Session = Depends(get_db)) -> ResumeService:
@@ -42,6 +43,10 @@ def get_application_service(db: Session = Depends(get_db)) -> ApplicationService
 
 def get_auto_apply_service(db: Session = Depends(get_db)) -> AutoApplyService:
     return AutoApplyService(db)
+
+
+def get_user_service(db: Session = Depends(get_db)) -> UserService:
+    return UserService(db)
 
 
 def get_current_user_id() -> int:

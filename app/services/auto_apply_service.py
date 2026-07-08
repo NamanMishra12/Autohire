@@ -77,6 +77,18 @@ class AutoApplyService:
             "portfolio_url": user.portfolio_url or "",
         }
 
+        # Load session cookies for all platforms
+        session_cookies = {}
+        for platform in ["linkedin", "indeed", "naukri"]:
+            cookies = self.user_repository.get_session_cookies(
+                user_id=user_id,
+                platform=platform,
+            )
+            if cookies:
+                session_cookies[platform] = cookies
+
+        logger.info(f"AutoApply: sessions available for: {list(session_cookies.keys())}")
+
         # Step 2: Load resume
         resume = self.resume_repository.get_by_id(resume_id)
         if not resume:
@@ -209,11 +221,12 @@ class AutoApplyService:
 
                 # Step 11: Auto apply
                 apply_result = await auto_apply_tool.apply(
-                    job_url=job.job_url or "",
-                    user_profile=user_profile,
-                    resume_path=resume.storage_path,
-                    cover_letter_text=cover_letter_text,
-                )
+                job_url=job.job_url or "",
+                user_profile=user_profile,
+                resume_path=resume.storage_path,
+                cover_letter_text=cover_letter_text,
+                session_cookies=session_cookies,
+            )
 
                 # Step 12: Update application record
                 if apply_result["success"]:

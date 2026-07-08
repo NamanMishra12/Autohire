@@ -12,6 +12,9 @@ class UserResponse(BaseModel):
     linkedin_url: str | None
     portfolio_url: str | None
     years_of_experience: int | None
+    has_linkedin_session: bool = False
+    has_indeed_session: bool = False
+    has_naukri_session: bool = False
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
@@ -24,3 +27,8 @@ class UserProfileUpdate(BaseModel):
     linkedin_url: str | None = None
     portfolio_url: str | None = None
     years_of_experience: int | None = None
+
+
+class SessionCookieUpdate(BaseModel):
+    platform: str  # linkedin, indeed, naukri
+    cookies_json: str  # JSON string of cookie list from browser

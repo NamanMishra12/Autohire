@@ -14,10 +14,7 @@ class User(Base):
 
     name: Mapped[str] = mapped_column(String(150))
 
-    email: Mapped[str] = mapped_column(
-        String(150),
-        unique=True,
-    )
+    email: Mapped[str] = mapped_column(String(150), unique=True)
 
     phone: Mapped[str] = mapped_column(String(20), nullable=True)
 
@@ -28,6 +25,13 @@ class User(Base):
     portfolio_url: Mapped[str] = mapped_column(String(255), nullable=True)
 
     years_of_experience: Mapped[int] = mapped_column(Integer, nullable=True)
+
+    # Encrypted session cookies per platform
+    linkedin_cookies_encrypted: Mapped[str] = mapped_column(Text, nullable=True)
+
+    indeed_cookies_encrypted: Mapped[str] = mapped_column(Text, nullable=True)
+
+    naukri_cookies_encrypted: Mapped[str] = mapped_column(Text, nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
