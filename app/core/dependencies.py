@@ -11,6 +11,7 @@ from app.services.match_service import MatchService
 from app.services.resume_service import ResumeService
 from app.services.tailor_service import TailorService
 from app.services.user_service import UserService
+from app.services.analytics_service import AnalyticsService
 
 
 def get_resume_service(db: Session = Depends(get_db)) -> ResumeService:
@@ -47,6 +48,10 @@ def get_auto_apply_service(db: Session = Depends(get_db)) -> AutoApplyService:
 
 def get_user_service(db: Session = Depends(get_db)) -> UserService:
     return UserService(db)
+
+
+def get_analytics_service(db: Session = Depends(get_db)) -> AnalyticsService:
+    return AnalyticsService(db)
 
 
 def get_current_user_id() -> int:
