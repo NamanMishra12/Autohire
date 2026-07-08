@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database.session import get_db
 from app.services.application_service import ApplicationService
+from app.services.auto_apply_service import AutoApplyService
 from app.services.cover_letter_service import CoverLetterService
 from app.services.document_service import DocumentService
 from app.services.job_service import JobService
@@ -37,6 +38,10 @@ def get_cover_letter_service(db: Session = Depends(get_db)) -> CoverLetterServic
 
 def get_application_service(db: Session = Depends(get_db)) -> ApplicationService:
     return ApplicationService(db)
+
+
+def get_auto_apply_service(db: Session = Depends(get_db)) -> AutoApplyService:
+    return AutoApplyService(db)
 
 
 def get_current_user_id() -> int:

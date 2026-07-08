@@ -9,6 +9,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.api.applications import router as applications_router
+from app.api.auto_apply import router as auto_apply_router
 from app.api.cover_letter import router as cover_letter_router
 from app.api.health import router as health_router
 from app.api.info import router as info_router
@@ -68,6 +69,7 @@ app.include_router(match_router)
 app.include_router(tailor_router)
 app.include_router(cover_letter_router)
 app.include_router(applications_router)
+app.include_router(auto_apply_router)
 
 
 @app.get("/", tags=["Root"])
