@@ -18,6 +18,7 @@ from app.api.match import router as match_router
 from app.api.resume import router as resume_router
 from app.api.tailor import router as tailor_router
 from app.api.users import router as users_router
+from app.api.workflows import router as workflows_router
 from app.core.config import settings
 from app.database.init_db import init_database
 from app.exceptions.custome_exceptions import (
@@ -72,6 +73,7 @@ app.include_router(cover_letter_router)
 app.include_router(applications_router)
 app.include_router(auto_apply_router)
 app.include_router(users_router)
+app.include_router(workflows_router)
 
 
 @app.get("/", tags=["Root"])
