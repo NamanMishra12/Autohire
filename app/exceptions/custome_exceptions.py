@@ -28,3 +28,14 @@ class ResumeNotFoundException(Exception):
     def __init__(self, message: str = "Resume not found."):
         self.message = message
         super().__init__(self.message)
+
+class UnauthorizedException(Exception):
+    def __init__(self, message: str = "Unauthorized."):
+        self.message = message
+        super().__init__(self.message)
+
+
+class InvalidCredentialsException(Exception):
+    def __init__(self, message: str = "Invalid email or password."):
+        self.message = message
+        super().__init__(self.message)

@@ -6,6 +6,8 @@ from app.exceptions.custome_exceptions import (
     FileTooLargeException,
     ResumeNotFoundException,
     UnsupportedFileTypeException,
+    UnauthorizedException,
+    InvalidCredentialsException,
 )
 from app.utils.logger import logger
 
@@ -78,6 +80,34 @@ async def resume_not_found_exception_handler(
 ):
     return JSONResponse(
         status_code=404,
+        content={
+            "success": False,
+            "message": exc.message,
+            "data": None,
+            "errors": None,
+        },
+    )
+
+async def unauthorized_exception_handler(
+    request: Request,
+    exc: UnauthorizedException,
+):
+    return JSONResponse(
+        status_code=401,
+        content={
+            "success": False,
+            "message": exc.message,
+            "data": None,
+            "errors": None,
+        },
+    )
+
+async def invalid_credentials_exception_handler(
+    request: Request,
+    exc: InvalidCredentialsException,
+):
+    return JSONResponse(
+        status_code=400,
         content={
             "success": False,
             "message": exc.message,
